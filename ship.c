@@ -6,7 +6,11 @@ HIB_Ship vship;
 void initShip(void)
 {
     //load ship img
+#ifdef VITA
+    vship.img=IMG_Load("app0:/img/ship.png");
+#else
     vship.img=IMG_Load("img/ship.png");
+#endif
     if(!vship.img)
 	{
 		SDL_Quit();

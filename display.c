@@ -13,7 +13,11 @@ void displayVBg(void){
 
 //init and load background
 void initVBg(void){
+#ifdef VITA
+    vbg=IMG_Load("app0:/img/bg2.jpg");
+#else
     vbg=IMG_Load("img/bg2.jpg");
+#endif
     if(!vship.img)
 	{
 		printf("IMG_Load: %s\n", IMG_GetError());

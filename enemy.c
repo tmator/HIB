@@ -23,7 +23,7 @@ void spawnEnemies(void)
         {
             enemy[i].alive=1;
             enemy[i].lifes=(rand() % 2)+1;
-            enemy[i].img = IMG_Load("img/en1.png");
+            enemy[i].img = IMG_Load("app0:/img/en1.png");
             enemy[i].tex = SDL_CreateTextureFromSurface(game.renderer, enemy[i].img);
             enemy[i].x = rand() % SCREEN_WIDTH;
             enemy[i].y = 10;

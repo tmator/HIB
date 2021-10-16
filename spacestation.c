@@ -12,7 +12,7 @@ SDL_Texture *texDest;
 void initStation(void)
 {
     #ifdef VITA
-    dest = IMG_Load("ux0:/app/HIB000001/img/sd.png");
+    dest = IMG_Load("app0:/img/sd.png");
     #else
     dest = IMG_Load("img/sd.png");
     #endif
@@ -23,14 +23,15 @@ void initStation(void)
     char ch;
 
     #ifdef VITA
-    strcat(filename,"ux0:/app/HIB000001/level/");
+    //dest = IMG_Load("app0:/level/");
+    //strcat(filename,"ux0:/app/HIB000001/level/");
     #else
     strcat(filename,"level/");
     #endif
     //itoa(game.level,name,10);
     strcat(name, ".txt");
     strcat(filename, name);
-    FILE* f = fopen("level/2.txt","rb");
+    FILE* f = fopen("app0:/level/2.txt","rb");
     if (f == NULL)
     {
         printf("Le fichier texte.txt n'a pas pu être ouvert\n");
@@ -58,7 +59,7 @@ char buffer[100];
             memset(filename, 0, sizeof(filename));
             memset(name, 0, sizeof(name));
     	    #ifdef VITA
-    	    strcat(filename,"ux0:/app/HIB000001/img/");
+    	    strcat(filename,"app0:/img/");
     	    #else
     	    strcat(filename,"img/");
     	    #endif

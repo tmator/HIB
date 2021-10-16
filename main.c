@@ -19,11 +19,11 @@ void init_sdl(void)
 	game.window = SDL_CreateWindow("Hole In Black", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	game.renderer = SDL_CreateRenderer(game.window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	TTF_Init();
-//    	#ifdef VITA
-//	police = TTF_OpenFont("ux0:/app/HIB000001/font/8-bit-hud.ttf", 15);
-//	#else
+    	#ifdef VITA
+	police = TTF_OpenFont("app0:/font/8-bit-hud.ttf", 15);
+	#else
 	police = TTF_OpenFont("font/8-bit-hud.ttf", 15);
-//	#endif
+	#endif
 
 
 }

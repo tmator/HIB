@@ -25,6 +25,7 @@ void doPadDown(int button) {
         case BTN_CROSS:
             //fire
             game.cross=1;
+	    game.crossP=0;
             break;
         case BTN_START:
             //quit
