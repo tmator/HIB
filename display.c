@@ -18,7 +18,7 @@ void initVBg(void){
 #else
     vbg=IMG_Load("img/bg2.jpg");
 #endif
-    if(!vship.img)
+    if(!vbg)
 	{
 		printf("IMG_Load: %s\n", IMG_GetError());
 		SDL_Quit();

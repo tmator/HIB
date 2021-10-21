@@ -7,7 +7,7 @@
 
 
 int isRunning = 1;
-
+int start=0;
 
 SDL_App game;
 
@@ -37,27 +37,45 @@ void quit_sdl(void)
 	SDL_Quit();
 
 }
-int main(int argv, char** args)
+void resetAll(void)
 {
-    //some inits
-    memset(&game, 0, sizeof(SDL_App));
 
+}
+void initAll(void)
+{
     game.type=0;
     game.guiState=0;
     game.crossP=0;
     game.squareP=0;
     game.score=0;
     game.level=2;
-    vship.lifes=3;
 
-    init_sdl();
+}
+
+void initVshoot(void)
+{
+
     initShip();
-    initVBg();
+    vship.lifes=3;
     initStation();
-    game.timer=0;
     zeroEnemies();
     zeroBullet();
-    #ifdef VITA
+    game.timer=0;
+
+}
+
+int main(int argv, char** args)
+{
+    //some inits
+    memset(&game, 0, sizeof(SDL_App));
+
+
+    init_sdl();
+    initAll();
+
+    initVBg();
+    printf("c");
+   #ifdef VITA
     game.joystick = 0;
     if (SDL_NumJoysticks() > 0) {
 		SDL_JoystickEventState(SDL_ENABLE);
@@ -70,31 +88,40 @@ int main(int argv, char** args)
 	{
         //main loop
 	    SDL_RenderClear(game.renderer);
+            displayVBg();
 
         //get inputs
+	//
 	    getInput();
-
-	    if (game.type==0)
+        //game.type=1;
+        if (game.type==0)
         {
             displayGui(0);
         }
         else if (game.type==1)
         {
-            displayVBg();
+	    if (start==0)
+	    {
+		    start++;
+		    initVshoot();
+	    }
             displayStation();
             spawnEnemies();
             displayEnemies();
             displayShip();
             vship.level=1;
+            displayScore();
+            displayLifes();
         }
         else if (game.type==10)
         {
             displayVBg();
             displayGameOver();
+	    SDL_Delay(3000);
+	    initAll();
+	    start=0;
         }
 
-        displayScore();
-        displayLifes();
         SDL_RenderPresent(game.renderer);
     }
 	quit_sdl();

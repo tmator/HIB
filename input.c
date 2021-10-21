@@ -28,6 +28,8 @@ void doPadDown(int button) {
 	    game.crossP=0;
             break;
         case BTN_START:
+	    SDL_Quit();
+	    exit(0);
             //quit
             break;
         default:

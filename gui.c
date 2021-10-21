@@ -12,11 +12,13 @@ SDL_Color greenC = {0,255, 0};
 SDL_Color m1Color;
 SDL_Color m2Color;
 SDL_Color m3Color;
+SDL_Color m4Color;
 
 char *title = "Hole In Black !";
 char *m1 = "1 - VShoot";
 char *m2 = "2 - HShoot";
 char *m3 = "3 - Asteroid";
+char *m4 = "4 - Tube";
 
 
 
@@ -24,13 +26,15 @@ void displayGui(int move)
 {
 
     if (game.cross==1)
-        game.type=game.guiState+1;
+    	game.type=game.guiState+1;
     if (game.left==1)
         game.guiState=0;
     if (game.up==1)
         game.guiState=1;
     if (game.right==1)
         game.guiState=2;
+    if (game.down==1)
+        game.guiState=3;
 
 
     if (game.guiState==0)
@@ -38,19 +42,27 @@ void displayGui(int move)
         m1Color=redC;
         m2Color=whiteC;
         m3Color=whiteC;
+        m4Color=whiteC;
     }
     else if (game.guiState==1)
     {
         m1Color=whiteC;
         m2Color=redC;
         m3Color=whiteC;
+        m4Color=whiteC;
     }
     else if (game.guiState==2)
     {
         m1Color=whiteC;
         m2Color=whiteC;
         m3Color=redC;
-                //if game.right = 1 nothing
+        m4Color=whiteC;
+    }else if (game.guiState==3)
+    {
+        m1Color=whiteC;
+        m2Color=whiteC;
+        m3Color=whiteC;
+        m4Color=redC;
     }
     int texW, texH;
     SDL_Surface *surfaceF = TTF_RenderText_Solid(police,title, whiteC);
@@ -62,6 +74,8 @@ void displayGui(int move)
     titleRect.w = texW; // controls the width of the rect
     titleRect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, texture, NULL, &titleRect);
+    SDL_FreeSurface(surfaceF);
+    SDL_DestroyTexture(texture);
 
     SDL_Surface *surfaceM1 = TTF_RenderText_Solid(police,m1, m1Color);
     SDL_Texture *textureM1= SDL_CreateTextureFromSurface(game.renderer, surfaceM1);
@@ -72,6 +86,9 @@ void displayGui(int move)
     m1Rect.w = texW; // controls the width of the rect
     m1Rect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, textureM1, NULL, &m1Rect);
+    SDL_FreeSurface(surfaceM1);
+    SDL_DestroyTexture(textureM1);
+
 
     SDL_Surface *surfaceM2 = TTF_RenderText_Solid(police,m2, m2Color);
     SDL_Texture *textureM2= SDL_CreateTextureFromSurface(game.renderer, surfaceM2);
@@ -82,6 +99,9 @@ void displayGui(int move)
     m2Rect.w = texW; // controls the width of the rect
     m2Rect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, textureM2, NULL, &m2Rect);
+    SDL_FreeSurface(surfaceM2);
+    SDL_DestroyTexture(textureM2);
+
 
     SDL_Surface *surfaceM3 = TTF_RenderText_Solid(police,m3, m3Color);
     SDL_Texture *textureM3= SDL_CreateTextureFromSurface(game.renderer, surfaceM3);
@@ -92,6 +112,20 @@ void displayGui(int move)
     m3Rect.w = texW; // controls the width of the rect
     m3Rect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, textureM3, NULL, &m3Rect);
+    SDL_FreeSurface(surfaceM3);
+    SDL_DestroyTexture(textureM3);
+
+    SDL_Surface *surfaceM4 = TTF_RenderText_Solid(police,m4, m4Color);
+    SDL_Texture *textureM4= SDL_CreateTextureFromSurface(game.renderer, surfaceM4);
+    SDL_QueryTexture(textureM4, NULL, NULL, &texW, &texH);
+    SDL_Rect m4Rect; //create a rect
+    m4Rect.x = 600;  //controls the rect's x coordinate
+    m4Rect.y = 60; // controls the rect's y coordinte
+    m4Rect.w = texW; // controls the width of the rect
+    m4Rect.h = texH; // controls the height of the rect
+    SDL_RenderCopy(game.renderer, textureM4, NULL, &m4Rect);
+    SDL_FreeSurface(surfaceM4);
+    SDL_DestroyTexture(textureM4);
 
 
 
@@ -123,6 +157,8 @@ void displayLifes()
     titleRect.w = texW; // controls the width of the rect
     titleRect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, texture, NULL, &titleRect);
+    SDL_FreeSurface(surfaceF);
+    SDL_DestroyTexture(texture);
 }
 
 void displayScore()
@@ -143,6 +179,8 @@ void displayScore()
     titleRect.w = texW; // controls the width of the rect
     titleRect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, texture, NULL, &titleRect);
+    SDL_FreeSurface(surfaceF);
+    SDL_DestroyTexture(texture);
 }
 
 void displayGameOver(){
@@ -158,5 +196,7 @@ void displayGameOver(){
     titleRect.w = texW; // controls the width of the rect
     titleRect.h = texH; // controls the height of the rect
     SDL_RenderCopy(game.renderer, texture, NULL, &titleRect);
+    SDL_FreeSurface(surfaceF);
+    SDL_DestroyTexture(texture);
 
 }

@@ -10,6 +10,8 @@ void zeroEnemies(void)
     for (int i=0; i<MAX_ENEMIES; i++)
     {
         enemy[i].alive=0;
+        enemy[i].lifes=0;
+        enemy[i].bul.alive=0;
     }
 
 }
@@ -19,11 +21,15 @@ void spawnEnemies(void)
 {
     for (int i=0; i<MAX_ENEMIES; i++)
     {
-        if (enemy[i].alive==0 && --game.timer <= 0)
+        if (enemy[i].alive==0 && --game.timer <=0)
         {
             enemy[i].alive=1;
             enemy[i].lifes=(rand() % 2)+1;
+#ifdef VITA
             enemy[i].img = IMG_Load("app0:/img/en1.png");
+#else
+            enemy[i].img = IMG_Load("img/en1.png");
+#endif
             enemy[i].tex = SDL_CreateTextureFromSurface(game.renderer, enemy[i].img);
             enemy[i].x = rand() % SCREEN_WIDTH;
             enemy[i].y = 10;

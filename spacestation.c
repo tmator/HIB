@@ -28,16 +28,20 @@ void initStation(void)
     #else
     strcat(filename,"level/");
     #endif
+    //TODO
     //itoa(game.level,name,10);
     strcat(name, ".txt");
     strcat(filename, name);
+    #ifdef VITA
     FILE* f = fopen("app0:/level/2.txt","rb");
+    #else
+    FILE* f = fopen("level/2.txt","rb");
+    #endif
     if (f == NULL)
     {
         printf("Le fichier texte.txt n'a pas pu être ouvert\n");
 	exit(0);
     }
-	    printf("d\n");
 
 char buffer[100];
     fread(buffer, 200, 1, f);
@@ -66,10 +70,8 @@ char buffer[100];
             strncat(name, &buffer[col], 1);
             strcat(name, ".png");
             strcat(filename, name);
-	    printf("a %s\n",filename);
             station[cpt].img=IMG_Load(filename);
 
-	    printf("b\n");
             if(!station[cpt].img)
             {
                 printf("IMG_Load: %s\n", IMG_GetError());
