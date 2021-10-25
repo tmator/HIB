@@ -63,6 +63,17 @@ void initVshoot(void)
     game.timer=0;
 
 }
+void initAst(void)
+{
+
+    astInitShip();
+    vship.lifes=3;
+    zeroEnemies();
+    game.timer=0;
+
+}
+
+
 
 int main(int argv, char** args)
 {
@@ -113,6 +124,18 @@ int main(int argv, char** args)
             displayScore();
             displayLifes();
         }
+        else if (game.type==3) //Aste
+	{
+	    if (start==0)
+	    {
+		    start++;
+		    initAst();
+	    }
+            spawnAstEnemies();
+            displayAstEnemies();
+            astDisplayShip();
+
+	}
         else if (game.type==10)
         {
             displayVBg();

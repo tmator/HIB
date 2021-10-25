@@ -15,6 +15,8 @@
 #include "spacestation.h"
 #include "util.h"
 #include "config.h"
+#include "astEn.h"
+#include "astShip.h"
 
 #ifdef VITA
 
@@ -27,6 +29,8 @@ extern HIB_Ship vship;
 extern HIB_Station station[STATION_SIZE_MAX];
 extern HIB_Enemy enemy[MAX_ENEMIES];
 
+extern HIB_Ship astShip;
+extern HIB_Enemy astEnemy[MAX_ASTENEMIES];
 
 extern TTF_Font *police;
 extern SDL_Color blackC;

@@ -11,6 +11,7 @@
 #define MAX_ENEMIES 10
 #define STATION_SIZE_MAX 24
 
+#define MAX_ASTENEMIES 	22
 
 #ifdef VITA
 #define STICK_UP 0
