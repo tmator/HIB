@@ -73,6 +73,13 @@ void initAst(void)
 
 }
 
+void initTube()
+{
+	initTShip();
+	tship.lifes=3;
+	game.timer=0;
+}
+
 
 
 int main(int argv, char** args)
@@ -125,17 +132,29 @@ int main(int argv, char** args)
             displayLifes();
         }
         else if (game.type==3) //Aste
-	{
-	    if (start==0)
-	    {
-		    start++;
-		    initAst();
-	    }
-            spawnAstEnemies();
-            displayAstEnemies();
+		{
+			if (start==0)
+			{
+				start++;
+				initAst();
+			}
+			spawnAstEnemies();
+			displayAstEnemies();
             astDisplayShip();
 
-	}
+		}
+		else if (game.type==4) //tube
+		{
+			if (start==0)
+			{
+				start++;
+				initTube();
+			}
+			
+			drawLevel();
+            drawShip();
+
+		}
         else if (game.type==10)
         {
             displayVBg();

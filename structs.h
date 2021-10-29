@@ -84,5 +84,46 @@ typedef struct {
 	SDL_Rect dstrect;
 } HIB_Enemy;
 
+typedef struct {
+    int x;
+    int y;
+    int w;
+    int h;
+    int ang;
+    int lifes;
+    int score;
+    int level;
+    int bonnus;
+    SDL_Surface* img;
+    SDL_Texture* tex;
+    SDL_Rect dstrect;
+} HIB_TShip;
+
+
+
+typedef struct {
+    int x;
+    int y;
+} Coord;
+
+typedef struct {
+    int x;
+    int y;
+    int w;
+    int h;
+    int z;
+    int velX;
+    int velY;
+    int cpt;
+
+    Coord coBull[300];
+    int coSize;
+
+    int alive;
+    int type; //0 green, 1 orange, 2 red
+    SDL_Rect rBull;
+
+} T_Bullet;
+
 
 #endif // STRUCTS_H_INCLUDED

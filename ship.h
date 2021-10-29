@@ -5,4 +5,10 @@ void initShip(void);
 
 void displayShip(void);
 
+void initTShip(void);
+
+void displayTShip(void);
+
+void drawTShip(void);
+
 #endif // SHIP_H_INCLUDED
