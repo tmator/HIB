@@ -49,38 +49,38 @@ int collisionCheck(SDL_Rect a, SDL_Rect b )
 }
 
 
-void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius)
+void DrawCircle(SDL_Renderer* renderer, int x, int y, int radius)
 {
-    const int32_t diameter = (radius * 2);
+    const int diameter = (radius * 2);
 
-    int32_t x = (radius - 1);
-    int32_t y = 0;
-    int32_t tx = 1;
-    int32_t ty = 1;
-    int32_t error = (tx - diameter);
+    int x2 = (radius - 1);
+    int y2 = 0;
+    int tx = 1;
+    int ty = 1;
+    int error = (tx - diameter);
 
-    while (x >= y)
+    while (x2 >= y2)
     {
         //  Each of the following renders an octant of the circle
-        SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
-        SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
-        SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
-        SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
-        SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
-        SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
-        SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
-        SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+        SDL_RenderDrawPoint(renderer, x + x2, y - y2);
+        SDL_RenderDrawPoint(renderer, x + x2, y + y2);
+        SDL_RenderDrawPoint(renderer, x - x2, y - y2);
+        SDL_RenderDrawPoint(renderer, x - x2, y + y2);
+        SDL_RenderDrawPoint(renderer, x + y2, y - x2);
+        SDL_RenderDrawPoint(renderer, x + y2, y + x2);
+        SDL_RenderDrawPoint(renderer, x - y2, y - x2);
+        SDL_RenderDrawPoint(renderer, x - y2, y + x2);
 
         if (error <= 0)
         {
-            ++y;
+            ++y2;
             error += ty;
             ty += 2;
         }
 
         if (error > 0)
         {
-            --x;
+            --x2;
             tx += 2;
             error += (tx - diameter);
         }
@@ -102,4 +102,28 @@ void DrawFCircle(SDL_Renderer* renderer, int x, int y, int radius)
             }
         }
     }
+}
+void getCoord(int x0, int y0, int x1, int y1) {
+
+    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    int err = (dx > dy ? dx : -dy) / 2, e2;
+
+    int cpt = 0;
+    for (;;) {
+
+//        tBull.coBull[cpt].x = x0;
+//        tBull.coBull[cpt].y = y0;
+        cpt++;
+
+       
+        if (x0 == x1 && y0 == y1)
+        {
+                break;
+        }
+        e2 = err;
+        if (e2 > -dx) { err -= dy; x0 += sx; }
+        if (e2 < dy) { err += dx; y0 += sy; }
+    }
+
 }

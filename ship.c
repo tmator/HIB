@@ -3,6 +3,7 @@
 
 HIB_Ship vship;
 HIB_TShip tship;
+T_Bullet tBull;
 
 void initShip(void)
 {
@@ -92,7 +93,7 @@ void displayTShip()
     tship.dstrect.w = tship.w;
     tship.dstrect.h = tship.h;
     //SDL_RenderCopy(renderer, tship.tex, NULL, &tship.dstrect);
-    SDL_RenderCopyEx(renderer, tship.tex, NULL, &tship.dstrect, tship.ang, NULL, SDL_FLIP_NONE); //keys[SDL_SCANCODE_F] ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE);
+    SDL_RenderCopyEx(game.renderer, tship.tex, NULL, &tship.dstrect, tship.ang, NULL, SDL_FLIP_NONE); //keys[SDL_SCANCODE_F] ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE);
 
 }
 
@@ -111,7 +112,7 @@ void initTShip(void)
     }
     //init ship values
     tship.level = 0;
-    tship.tex = SDL_CreateTextureFromSurface(renderer, tship.img);
+    tship.tex = SDL_CreateTextureFromSurface(game.renderer, tship.img);
     tship.w = 50;
     tship.h = 50;
     tship.x = (SCREEN_WIDTH - tship.w) / 2;
@@ -122,33 +123,33 @@ void initTShip(void)
 void drawTShip()
 {
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(game.renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
     //get ship pos
 
-    if (right == 1)
+    if (game.right == 1)
     {
-        posX++;
+        tship.posX++;
     }
-    else if (left == 1)
+    else if (game.left == 1)
     {
-        posX--;
+        tship.posX--;
     }
-    if (posX > 15)
+    if (tship.posX > 15)
     {
-        posX = 0;
+        tship.posX = 0;
     }
-    if (posX < 0)
+    if (tship.posX < 0)
     {
-        posX = 15;
+        tship.posX = 15;
     }
 
-    int xMh = (tubeCircle[tab][posX][posY] + tubeCircle[tab][posX + 1][posY]) / 2;
-    int yMh = (tubeCircle[tab][posX][posY + 1] + tubeCircle[tab][posX + 1][posY + 1]) / 2;
+    int xMh = (tubeCircle[0][tship.posX][tship.posY] + tubeCircle[0][tship.posX + 1][tship.posY]) / 2;
+    int yMh = (tubeCircle[0][tship.posX][tship.posY + 1] + tubeCircle[0][tship.posX + 1][tship.posY + 1]) / 2;
 
-    int xMb = (tubeCircle[1][posX][posY] + tubeCircle[1][posX + 1][posY]) / 2;
-    int yMb = (tubeCircle[1][posX][posY + 1] + tubeCircle[1][posX + 1][posY + 1]) / 2;
+    int xMb = (tubeCircle[1][tship.posX][tship.posY] + tubeCircle[1][tship.posX + 1][tship.posY]) / 2;
+    int yMb = (tubeCircle[1][tship.posX][tship.posY + 1] + tubeCircle[1][tship.posX + 1][tship.posY + 1]) / 2;
 
-    if (cross == 1)
+    if (game.cross == 1)
     {
         if (tBull.alive == 0)
         {
@@ -169,27 +170,27 @@ void drawTShip()
         }
         else
         {
-            DrawFCircle(renderer, tBull.coBull[tBull.cpt].x, tBull.coBull[tBull.cpt].y, 3);
+            DrawFCircle(game.renderer, tBull.coBull[tBull.cpt].x, tBull.coBull[tBull.cpt].y, 3);
 
         }
     }
     
-    SDL_RenderDrawLine(renderer, tubeCircle[0][posX][posY], tubeCircle[0][posX][posY+1], tubeCircle[1][posX][posY], tubeCircle[1][posX][posY + 1]);
-    SDL_RenderDrawLine(renderer, tubeCircle[0][posX + 1][posY], tubeCircle[0][posX + 1][posY + 1], tubeCircle[1][posX + 1][posY], tubeCircle[1][posX + 1][posY + 1]);
+    SDL_RenderDrawLine(game.renderer, tubeCircle[0][tship.posX][tship.posY], tubeCircle[0][tship.posX][tship.posY+1], tubeCircle[1][tship.posX][tship.posY], tubeCircle[1][tship.posX][tship.posY + 1]);
+    SDL_RenderDrawLine(game.renderer, tubeCircle[0][tship.posX + 1][tship.posY], tubeCircle[0][tship.posX + 1][tship.posY + 1], tubeCircle[1][tship.posX + 1][tship.posY], tubeCircle[1][tship.posX + 1][tship.posY + 1]);
     
 
-    SDL_RenderDrawLine(renderer, tubeCircle[tab][posX][posY], tubeCircle[tab][posX][posY + 1], tubeCircle[tab][posX + 1][posY], tubeCircle[tab][posX + 1][posY + 1]);
+    SDL_RenderDrawLine(game.renderer, tubeCircle[0][tship.posX][tship.posY], tubeCircle[0][tship.posX][tship.posY + 1], tubeCircle[0][tship.posX + 1][tship.posY], tubeCircle[0][tship.posX + 1][tship.posY + 1]);
     
-    //int xMh = (tubeCircle[tab][posX][posY] + tubeCircle[tab][posX + 1][posY]) / 2;
-    //int yMh = (tubeCircle[tab][posX][posY + 1] + tubeCircle[tab][posX + 1][posY + 1]) / 2;
+    //int xMh = (tubeCircle[0][posX][posY] + tubeCircle[0][posX + 1][posY]) / 2;
+    //int yMh = (tubeCircle[0][posX][posY + 1] + tubeCircle[0][posX + 1][posY + 1]) / 2;
 
     //int xMb = (tubeCircle[1][posX][posY] + tubeCircle[1][posX + 1][posY]) / 2;
     //int yMb = (tubeCircle[1][posX][posY + 1] + tubeCircle[1][posX + 1][posY + 1]) / 2;
-    SDL_RenderDrawLine(renderer, xMh, yMh, xMb, yMb);
+    SDL_RenderDrawLine(game.renderer, xMh, yMh, xMb, yMb);
     tship.x = xMh-(tship.w/2);
     tship.y = yMh-(tship.h/2);
      
     tship.ang = (atan2(yMh - yMb, xMh - xMb) * 180 / M_PI) - 90;
-    //displayShip();
+    displayTShip();
 
 }

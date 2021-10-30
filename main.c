@@ -140,7 +140,7 @@ int main(int argv, char** args)
 			}
 			spawnAstEnemies();
 			displayAstEnemies();
-            astDisplayShip();
+            		astDisplayShip();
 
 		}
 		else if (game.type==4) //tube
@@ -152,7 +152,7 @@ int main(int argv, char** args)
 			}
 			
 			drawLevel();
-            drawShip();
+            		drawTShip();
 
 		}
         else if (game.type==10)
